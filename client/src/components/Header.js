@@ -10,32 +10,38 @@ import {
 
 const Header = () => {
   return (
-    <header className="bg-gray-900 text-white py-2 px-4 flex justify-between items-center">
-      <h1 className="text-xl">KRASV BANK</h1>
+    <header className="bg-gray-900 text-white py-4 px-8 flex justify-between items-center">
+      <h1 className="text-2xl font-bold">KRASV BANK</h1>
       <nav>
-        <ul className="flex">
-          <li className="mx-2">
-            <Link to="/" className="flex items-center">
+        <ul className="flex space-x-4">
+          <li>
+            <Link to="/" className="flex items-center hover:text-blue-300">
               <FaHome className="mr-1" /> Home
             </Link>
           </li>
-          <li className="mx-2">
-            <Link to="/about" className="flex items-center">
+          <li>
+            <Link to="/about" className="flex items-center hover:text-blue-300">
               <FaInfoCircle className="mr-1" /> About
             </Link>
           </li>
-          <li className="mx-2">
-            <Link to="/contact" className="flex items-center">
+          <li>
+            <Link
+              to="/contact"
+              className="flex items-center hover:text-blue-300"
+            >
               <FaEnvelope className="mr-1" /> Contact
             </Link>
           </li>
-          <li className="mx-2">
-            <Link to="/login" className="flex items-center">
+          <li>
+            <Link to="/login" className="flex items-center hover:text-blue-300">
               <FaSignInAlt className="mr-1" /> Login
             </Link>
           </li>
-          <li className="mx-2">
-            <Link to="/register" className="flex items-center">
+          <li>
+            <Link
+              to="/register"
+              className="flex items-center hover:text-blue-300"
+            >
               <FaUserPlus className="mr-1" /> Register
             </Link>
           </li>

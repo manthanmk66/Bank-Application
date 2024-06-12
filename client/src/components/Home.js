@@ -71,21 +71,6 @@ const Home = () => {
           </button>
         </div>
       </div>
-
-      <footer className="footer text-center py-8 bg-gray-200 border-t border-gray-300">
-        <p>&copy; 2024 Krasv Bank. All rights reserved.</p>
-        <div className="footer-links mt-4">
-          <Link to="/privacy-policy" className="text-blue-500">
-            Privacy Policy
-          </Link>
-          <Link to="/terms-of-service" className="text-blue-500">
-            Terms of Service
-          </Link>
-          <Link to="/contact" className="text-blue-500">
-            Contact Us
-          </Link>
-        </div>
-      </footer>
     </div>
   );
 };

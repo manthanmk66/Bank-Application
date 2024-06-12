@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
-const Register = () => {
+const SignUpSection = () => {
   const [formData, setFormData] = useState({
     customerId: "",
     fullName: "",
@@ -20,155 +21,173 @@ const Register = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log("hiii");
     e.preventDefault();
     // Handle form submission
     console.log(formData);
+    toast.success("Successfully Registered!");
   };
 
+  useEffect(() => {
+    // You can perform side effects here, like fetching initial data if needed.
+    console.log("Component mounted or formData changed:", formData);
+  }, [formData]);
+
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 mt-20">
-      <h2 className="text-2xl font-bold text-blue-900 text-center mb-8">
-        Register
-      </h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group mb-6">
-          <label
-            htmlFor="fullName"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-            required
-          />
+    <section className="bg-gray-100 dark:bg-gray-800 py-8 md:py-12 lg:py-16">
+      <div className="container mx-auto px-4 md:px-6 lg:px-96 ">
+        <Toaster position="top-center" reverseOrder={false} />
+        <div className="bg-white  rounded-lg shadow-md p-6 flex flex-col gap-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Sign Up</h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-6 h-6 text-gray-500 dark:text-gray-400"
+            >
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <form className="grid gap-3 " onSubmit={handleSubmit}>
+            <div className="grid  gap-4">
+              <div className="space-y-2">
+                <label
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  htmlFor="fullName"
+                >
+                  Full Name
+                </label>
+                <input
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  id="fullName"
+                  name="fullName"
+                  placeholder="Enter your full name"
+                  type="text"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="space-y-2">
+                <label
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  htmlFor="dateOfBirth"
+                >
+                  Date of Birth
+                </label>
+                <input
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  type="date"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="space-y-2">
+              <label
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                htmlFor="phoneNumber"
+              >
+                Phone Number
+              </label>
+              <input
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="phoneNumber"
+                name="phoneNumber"
+                placeholder="Enter your phone number"
+                type="tel"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="space-y-2">
+              <label
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="space-y-2">
+              <label
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                htmlFor="aadharNumber"
+              >
+                Aadhar Number
+              </label>
+              <input
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="aadharNumber"
+                name="aadharNumber"
+                placeholder="Enter your Aadhar number"
+                type="text"
+                value={formData.aadharNumber}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="space-y-2">
+              <label
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                htmlFor="panNumber"
+              >
+                PAN Number
+              </label>
+              <input
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="panNumber"
+                name="panNumber"
+                placeholder="Enter your PAN number"
+                type="text"
+                value={formData.panNumber}
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
+            >
+              Sign Up
+            </button>
+          </form>
         </div>
-        <div className="form-group mb-6">
-          <label
-            htmlFor="dateOfBirth"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            id="dateOfBirth"
-            name="dateOfBirth"
-            value={formData.dateOfBirth}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-        <div className="form-group mb-6">
-          <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-        <div className="form-group mb-6">
-          <label
-            htmlFor="phoneNumber"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-        <div className="form-group mb-6">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-        <div className="form-group mb-6">
-          <label
-            htmlFor="aadharNumber"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Aadhar Number
-          </label>
-          <input
-            type="text"
-            id="aadharNumber"
-            name="aadharNumber"
-            value={formData.aadharNumber}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-        <div className="form-group mb-6">
-          <label
-            htmlFor="panNumber"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            PAN Number
-          </label>
-          <input
-            type="text"
-            id="panNumber"
-            name="panNumber"
-            value={formData.panNumber}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
-        >
-          Register
-        </button>
-      </form>
-      <footer className="mt-8">
-        <p className="text-center text-gray-600">
-          &copy; 2024 Krasv Bank. All rights reserved.
-        </p>
-        <div className="flex justify-center mt-2">
-          <a href="/privacy-policy" className="text-blue-500 mr-4">
-            Privacy Policy
-          </a>
-          <a href="/terms-of-service" className="text-blue-500">
-            Terms of Service
-          </a>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default Register;
+export default SignUpSection;

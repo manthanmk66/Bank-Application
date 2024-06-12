@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -12,24 +13,27 @@ const Login = () => {
   const handleCustomerLogin = (event) => {
     event.preventDefault();
     // Handle customer login logic here
-    navigate("/dashboard");
+    toast.success("Customer Login Successfully");
+    // navigate("/dashboard");
   };
 
   const handleAdminLogin = (event) => {
     event.preventDefault();
     // Handle admin login logic here
-    navigate("/adminDashboard");
+    toast.success("Admin Login Successfully");
+    // navigate("/adminDashboard");
   };
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+      <Toaster />
       <div className="login-container p-8 border border-gray-300 rounded-lg bg-white">
         <h1 className="text-2xl font-bold text-blue-900 mb-8">Login</h1>
         <div className="tabs mb-8">
           <button
             className={`tab-button ${
               !isAdmin ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
-            } rounded-l-md focus:outline-none`}
+            } rounded-l-full focus:outline-none px-6 py-2`}
             onClick={() => setIsAdmin(false)}
           >
             Customer Login
@@ -37,103 +41,29 @@ const Login = () => {
           <button
             className={`tab-button ${
               isAdmin ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
-            } rounded-r-md focus:outline-none`}
+            } rounded-r-full focus:outline-none px-6 py-2`}
             onClick={() => setIsAdmin(true)}
           >
             Admin Login
           </button>
         </div>
 
-        {!isAdmin ? (
-          <form onSubmit={handleCustomerLogin}>
-            <div className="form-group mb-4">
-              <label
-                htmlFor="email"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Email:
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded"
-                required
-              />
-            </div>
-            <div className="form-group mb-4">
-              <label
-                htmlFor="password"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Password:
-              </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
-            >
-              Login
-            </button>
-            <div className="create-account mt-4">
-              <p>
-                Don't have an account?{" "}
-                <Link to="/registration" className="text-blue-500">
-                  Create one
-                </Link>
-              </p>
-            </div>
-          </form>
+        {isAdmin ? (
+          <AdminLoginForm
+            adminId={adminId}
+            adminPassword={adminPassword}
+            setAdminId={setAdminId}
+            setAdminPassword={setAdminPassword}
+            handleAdminLogin={handleAdminLogin}
+          />
         ) : (
-          <form onSubmit={handleAdminLogin}>
-            <div className="form-group mb-4">
-              <label
-                htmlFor="adminId"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Admin ID:
-              </label>
-              <input
-                type="text"
-                id="adminId"
-                value={adminId}
-                onChange={(e) => setAdminId(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded"
-                required
-              />
-            </div>
-            <div className="form-group mb-4">
-              <label
-                htmlFor="adminPassword"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Password:
-              </label>
-              <input
-                type="password"
-                id="adminPassword"
-                value={adminPassword}
-                onChange={(e) => setAdminPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
-            >
-              Login
-            </button>
-          </form>
+          <CustomerLoginForm
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            handleCustomerLogin={handleCustomerLogin}
+          />
         )}
 
         <footer className="footer mt-8">
@@ -149,6 +79,110 @@ const Login = () => {
         </footer>
       </div>
     </div>
+  );
+};
+
+const AdminLoginForm = ({
+  adminId,
+  adminPassword,
+  setAdminId,
+  setAdminPassword,
+  handleAdminLogin,
+}) => {
+  return (
+    <form onSubmit={handleAdminLogin}>
+      <div className="form-group mb-4">
+        <label htmlFor="adminId" className="block text-gray-700 font-bold mb-2">
+          Admin ID:
+        </label>
+        <input
+          type="text"
+          id="adminId"
+          value={adminId}
+          onChange={(e) => setAdminId(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div className="form-group mb-4">
+        <label
+          htmlFor="adminPassword"
+          className="block text-gray-700 font-bold mb-2"
+        >
+          Password:
+        </label>
+        <input
+          type="password"
+          id="adminPassword"
+          value={adminPassword}
+          onChange={(e) => setAdminPassword(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
+      >
+        Login
+      </button>
+    </form>
+  );
+};
+
+const CustomerLoginForm = ({
+  email,
+  password,
+  setEmail,
+  setPassword,
+  handleCustomerLogin,
+}) => {
+  return (
+    <form onSubmit={handleCustomerLogin}>
+      <div className="form-group mb-4">
+        <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+          Email:
+        </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div className="form-group mb-4">
+        <label
+          htmlFor="password"
+          className="block text-gray-700 font-bold mb-2"
+        >
+          Password:
+        </label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
+      >
+        Login
+      </button>
+      <div className="create-account mt-4">
+        <p>
+          Don't have an account?{" "}
+          <Link to="/registration" className="text-blue-500">
+            Create one
+          </Link>
+        </p>
+      </div>
+    </form>
   );
 };
 
