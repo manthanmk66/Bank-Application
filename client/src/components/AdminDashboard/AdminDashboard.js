@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const AdminDashboard = () => {
-  // Dummy data for users and transactions
+  // Dummy data for bank users and transactions
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -16,13 +16,6 @@ const AdminDashboard = () => {
       email: "jane@example.com",
       accountNumber: "987654321",
       balance: "2500.00",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      accountNumber: "456789123",
-      balance: "10000.00",
     },
     {
       id: 3,
@@ -59,7 +52,16 @@ const AdminDashboard = () => {
       accountNumber: "456789123",
       balance: "10000.00",
     },
+    {
+      id: 8,
+      name: "Bob Johnson",
+      email: "bob@example.com",
+      accountNumber: "456789123",
+      balance: "10000.00",
+    },
   ]);
+
+  // Dummy Transection data for showing on UI instead of the Data fetched from backend
 
   const transactions = [
     { date: "2024-06-10", description: "Groceries", amount: -50.0 },
@@ -135,6 +137,9 @@ const AdminDashboard = () => {
                     <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
                       Actions
                     </th>
+                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -155,7 +160,16 @@ const AdminDashboard = () => {
                           >
                             Edit
                           </button>
-                          {/* Add delete button if needed */}
+                        </div>
+                      </td>
+                      <td className=" align-middle">
+                        <div className="flex items-center gap-2">
+                          <button
+                            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-24"
+                            onClick={() => handleUserSelect(user.id)}
+                          >
+                            Transections
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -257,8 +271,6 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
-        {/* Edit User Details section */}
-        {/* Transaction section */}
       </main>
     </div>
   );

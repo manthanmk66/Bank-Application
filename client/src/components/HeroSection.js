@@ -4,9 +4,7 @@ import React from "react";
 function HeroSection() {
   return (
     <div
-      className="w-full --tw-gradient-from: #155e75 var(--tw-gradient-from-position);
---tw-gradient-to: rgb(21 94 117 / 0) var(--tw-gradient-to-position);
---tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); "
+      className="w-full "
     >
       <section className="w-full py-12 md:py-24 lg:py-32 flex items-center justify-center">
         <div className="container grid items-center gap-4 px-4 md:px-6">
